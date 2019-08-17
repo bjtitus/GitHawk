@@ -12,4 +12,5 @@ jobs:
     - name: Build with Xcode
       run: |
               export PATH="./node_modules/.bin:$PATH"
+              echo $PATH
               xcodebuild -workspace Freetime.xcworkspace -scheme Freetime-AppCenter CODE_SIGNING_ALLOWED="NO"
