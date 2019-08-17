@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-10.14
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build with Xcode
+      run: xcodebuild -workspace Freetime.xcworkspace -scheme Freetime-AppCenter CODE_SIGNING_ALLOWED="NO"
