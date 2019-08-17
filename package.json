@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "apollo": "^1.9.2"
+    "apollo": "^1.9.2",
+    "npx": "^10.2.0"
   }
 }
