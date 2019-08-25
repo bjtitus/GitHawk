@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<package>
+	<id>io.titus.Instruments</id>
+	<title>Instruments</title>
+	<owner>
+		<name>Brandon Titus</name>
+	</owner>
+
+    <!-- Instruments Developer Help: https://help.apple.com/instruments/developer/mac/current/ -->
+    
+    <!-- MARK: Schema Definitions -->
+    <!-- Define point and interval schemas needed to represent the input and output tables your package will use. -->
+    <!-- Two kinds are available: schemas with automatically generated modelers, and schemas that require custom modelers -->
+    <!--   Generated modelers: 'os-log-point-schema', 'os-signpost-interval-schema', 'ktrace-point-schema', 'ktrace-interval-schema' -->
+    <!--   Custom modeler required: 'point-schema', 'interval-schema' -->
+    <!-- To use existing schemas from other packages, declare 'import-schema' elements -->
+
+    <os-log-point-schema>
+        <id>search-status</id>
+        <title>Search Status</title>
+        
+        <message-type>"Info"</message-type>
+        <subsystem>"io.titus.Freetime"</subsystem>
+        <category>"Search"</category>
+        
+        <pattern>
+            <message>"Old status: " ?oldStatus " New status: " ?newStatus</message>
+        </pattern>
+        
+        <timestamp-column>
+            <mnemonic>time</mnemonic>
+            <title>Timestamp</title>
+            <type>event-time</type>
+        </timestamp-column>
+                
+        <column>
+            <mnemonic>new-status</mnemonic>
+            <title>New Status</title>
+            <type>string</type>
+            <expression>?newStatus</expression>
+        </column>
+        
+        <column>
+            <mnemonic>old-status</mnemonic>
+            <title>Old Status</title>
+            <type>string</type>
+            <expression>?oldStatus</expression>
+        </column>
+
+    </os-log-point-schema>
+    
+    <os-signpost-interval-schema>
+        <id>graphql-networking</id>
+        <title>Network Query Operation</title>
+        
+        <subsystem>"com.apollo.core"</subsystem>
+        <category>"HTTP"</category>
+        <name>"Send"</name>
+        
+        <start-pattern>
+            <message>"Op: " ?operation " URL: " ?url</message>
+        </start-pattern>
+        
+        <end-pattern>
+            <message>"Op: " ?operation " URL: " ?url " Er: " ?error</message>
+        </end-pattern>
+                        
+        <column>
+            <mnemonic>operation</mnemonic>
+            <title>Operation</title>
+            <type>string</type>
+            <expression>?operation</expression>
+        </column>
+        
+        <column>
+            <mnemonic>url</mnemonic>
+            <title>URL</title>
+            <type>string</type>
+            <expression>?url</expression>
+        </column>
+        
+        <column>
+            <mnemonic>status</mnemonic>
+            <title>Status</title>
+            <type>event-concept</type>
+            <expression>(if (= (str-compare ?error "nil") 0) then "Success" else "Error")</expression>
+        </column>
+        
+        <column>
+            <mnemonic>error</mnemonic>
+            <title>Error</title>
+            <type>event-concept</type>
+            <expression>?error</expression>
+        </column>
+
+    </os-signpost-interval-schema>
+
+    
+
+    <!-- MARK: Modeler Declarations -->
+    <!-- If there are schemas defined that require a custom modeler, each can be declared with a 'modeler' element -->
+    <!-- Modelers are based on CLIPS rules and may define 1..n output schemas, each requiring 1..n input schemas -->
+
+    <!-- MARK: Instrument Definitions -->
+    <!-- Instruments record and display data, creating concrete table requirements that instance modelers and data streams. -->
+    <!-- Any number of 'instrument' elements can be defined; each instrument should provide a cohesive graph and detail experience. -->
+    
+    <instrument>
+        <id>search-status</id>
+        <title>Search Status</title>
+        <category>Behavior</category>
+        <purpose>Logging Search Status</purpose>
+        <icon>Generic</icon>
+        
+        <create-table>
+            <id>search-status</id>
+            <schema-ref>search-status</schema-ref>
+        </create-table>
+        
+        <!-- Define graph to draw for your Instrument (optional) -->
+        
+        <graph>
+            <title>Search Status</title>
+            <lane>
+                <title>Consecutive Results</title>
+                <table-ref>search-status</table-ref>
+                
+                <plot>
+                    <value-from>new-status</value-from>
+                </plot>
+            </lane>
+        </graph>
+        
+        <!-- Define at least one detail view for your Instrument -->
+        
+        <list>
+            <title>Consecutive Results</title>
+            <table-ref>search-status</table-ref>
+            <column>time</column>
+            <column>new-status</column>
+            <column>old-status</column>
+        </list>
+    </instrument>
+    
+    <instrument>
+        <id>networking</id>
+        <title>GraphQL Networking</title>
+        <category>Behavior</category>
+        <purpose>Networking</purpose>
+        <icon>Generic</icon>
+        
+        <create-table>
+            <id>networking</id>
+            <schema-ref>graphql-networking</schema-ref>
+        </create-table>
+        
+        <!-- Define graph to draw for your Instrument (optional) -->
+        
+        <graph>
+            <title>Networking</title>
+            <lane>
+                <title>Networking</title>
+                <table-ref>networking</table-ref>
+                
+                <plot>
+                    <value-from>operation</value-from>
+                    <color-from>status</color-from>
+                </plot>
+            </lane>
+        </graph>
+        
+        <!-- Define at least one detail view for your Instrument -->
+        
+        <list>
+            <title>Networking</title>
+            <table-ref>networking</table-ref>
+            <column>operation</column>
+            <column>url</column>
+            <column>status</column>
+            <column>error</column>
+        </list>
+    </instrument>
+
+
+    <!-- MARK: Embed Templates -->
+    <!-- Templates may be included and represent a collection of tools configured for a specific tracing workflow -->
+    <!-- Each 'template' element specifies the relative path to a .tracetemplate file in the project -->
+    <!-- To create a template: start with a blank document, configure with instruments desired, and choose "File -> Save as Template" -->
+</package>

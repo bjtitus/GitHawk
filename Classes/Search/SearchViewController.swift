@@ -9,6 +9,7 @@
 import UIKit
 import IGListKit
 import Apollo
+import os
 
 class SearchViewController: UIViewController,
     ListAdapterDataSource,
@@ -27,6 +28,8 @@ class SearchViewController: UIViewController,
     private var recentStore = SearchRecentStore()
     private let debouncer = Debouncer()
     private var keyboardAdjuster: ScrollViewKeyboardAdjuster?
+    
+    private static let SearchLog = OSLog(subsystem: "io.titus.Freetime", category: "Search")
 
     enum State {
         case idle
@@ -39,6 +42,19 @@ class SearchViewController: UIViewController,
             // To facilitate side-effect free state transition, we should cancel any on-going networking.
             // The `loading` => `loading` state transition can only be triggered through search while typing.
             // In that case, we don't want to store partial searches in the store.
+            if #available(iOS 12.0, *) {
+                func stringValue(state: State) -> String {
+                    switch newValue {
+                    case .idle: return "idle"
+                    case .loading: return "loading"
+                    case .results: return "results"
+                    case .error: return "error"
+                    }
+                }
+                let oldString = stringValue(state: state)
+                let newString = stringValue(state: newValue)
+                os_log(.info, log: SearchViewController.SearchLog, "Old status: %@ New status: %@", oldString, newString)
+            }
             guard case let .loading(request, query) = state else { return }
             request.cancel()
             if case .loading = newValue {

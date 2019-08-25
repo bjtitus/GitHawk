@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 protocol BookmarkIDCloudKeyValueStore {
     func savedBookmarks(for key: String) -> NSMutableOrderedSet
@@ -87,6 +88,9 @@ final class BookmarkIDCloudStore {
     func add(graphQLID: String) {
         assert(Thread.isMainThread)
         guard storage.contains(graphQLID) == false else { return }
+        if #available(iOS 12.0, *) {
+            os_log(.info, log: Log.pointsOfInterest, "Add Bookmark %@", graphQLID)
+        }
         storage.add(graphQLID)
         save()
         enumerateListeners { $0.didUpdateBookmarks(in: self) }
@@ -95,6 +99,9 @@ final class BookmarkIDCloudStore {
     func add(graphQLIDs: [String]) {
         assert(Thread.isMainThread)
         storage.addObjects(from: graphQLIDs)
+        if #available(iOS 12.0, *) {
+            os_log(.info, log: Log.pointsOfInterest, "Add Bookmarks %@", graphQLIDs.joined(separator: ","))
+        }
         save()
         enumerateListeners { $0.didUpdateBookmarks(in: self) }
     }
@@ -102,6 +109,9 @@ final class BookmarkIDCloudStore {
     func remove(graphQLID: String) {
         assert(Thread.isMainThread)
         guard storage.contains(graphQLID) else { return }
+        if #available(iOS 12.0, *) {
+            os_log(.info, log: Log.pointsOfInterest, "Remove Bookmark %@", graphQLID)
+        }
         storage.remove(graphQLID)
         save()
         enumerateListeners { $0.didUpdateBookmarks(in: self) }
@@ -119,6 +129,9 @@ final class BookmarkIDCloudStore {
 
     func clear() {
         assert(Thread.isMainThread)
+        if #available(iOS 12.0, *) {
+            os_log(.info, log: Log.pointsOfInterest, "Clear Bookmarks removing:%d", storage.count)
+        }
         storage.removeAllObjects()
         save()
         enumerateListeners { $0.didUpdateBookmarks(in: self) }

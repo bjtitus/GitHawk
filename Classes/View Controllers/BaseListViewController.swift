@@ -8,6 +8,7 @@
 
 import UIKit
 import IGListKit
+import os
 
 protocol BaseListViewControllerDataSource: class {
     func models(adapter: ListSwiftAdapter) -> [ListSwiftPair]
@@ -63,6 +64,10 @@ EmptyViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         rz_smoothlyDeselectRows(collectionView: feed.collectionView)
+        
+        if #available(iOS 12.0, *) {
+            os_log(.info, log: Log.pointsOfInterest, "Show: %@", String(describing: type(of: self)))
+        }
     }
 
     override func viewWillLayoutSubviews() {

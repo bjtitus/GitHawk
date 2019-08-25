@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 extension URLSessionTask: Cancellable {}
 
@@ -49,6 +50,10 @@ public struct GraphQLHTTPResponseError: Error, LocalizedError {
 
 /// A network transport that uses HTTP POST requests to send GraphQL operations to a server, and that uses `URLSession` as the networking implementation.
 public class HTTPNetworkTransport: NetworkTransport {
+    @available(iOS 10.0, *)
+    private static let log = OSLog(subsystem: "com.apollo.core", category: "HTTP")
+    
+    
   let url: URL
   let session: URLSession
   let serializationFormat = JSONSerializationFormat.self
@@ -81,8 +86,19 @@ public class HTTPNetworkTransport: NetworkTransport {
 
     let body = requestBody(for: operation)
     request.httpBody = try! serializationFormat.serialize(value: body)
+        
+    var signpostID: Any? = nil
+    
+    if #available(iOS 12.0, *), #available(watchOSApplicationExtension 5.0, *) {
+        signpostID = OSSignpostID(log: HTTPNetworkTransport.log, object: request as AnyObject)
+    }
     
     let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+        
+        if #available(iOS 12.0, *), #available(watchOSApplicationExtension 5.0, *) {
+            os_signpost(.end, log: HTTPNetworkTransport.log, name: "Send", signpostID: signpostID as! OSSignpostID, "Op: %@ URL: %@ Er: %@", String(describing: type(of: operation)) ?? "Unknown", request.url?.absoluteString ?? "Unknown", String(describing: error))
+        }
+        
       if error != nil {
         completionHandler(nil, error)
         return
@@ -111,6 +127,10 @@ public class HTTPNetworkTransport: NetworkTransport {
       } catch {
         completionHandler(nil, error)
       }
+    }
+    
+    if #available(iOS 12.0, *), #available(watchOSApplicationExtension 5.0, *) {
+        os_signpost(.begin, log: HTTPNetworkTransport.log, name: "Send", signpostID: signpostID as! OSSignpostID, "Op: %@ URL: %@", String(describing: type(of: operation)) ?? "Unknown", request.url?.absoluteString ?? "Unknown")
     }
     
     task.resume()

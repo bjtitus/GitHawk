@@ -1,0 +1,167 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F5EA93BE230CEBF800346235 /* Instruments.instrpkg in Sources */ = {isa = PBXBuildFile; fileRef = F5EA93BD230CEBF800346235 /* Instruments.instrpkg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F5EA93BA230CEBF800346235 /* Instruments.instrdst */ = {isa = PBXFileReference; explicitFileType = com.apple.instruments.instrdst; includeInIndex = 0; path = Instruments.instrdst; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5EA93BD230CEBF800346235 /* Instruments.instrpkg */ = {isa = PBXFileReference; lastKnownFileType = "com.apple.instruments.package-definition"; path = Instruments.instrpkg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		F5EA93B3230CEBF800346235 = {
+			isa = PBXGroup;
+			children = (
+				F5EA93BC230CEBF800346235 /* Instruments */,
+				F5EA93BB230CEBF800346235 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F5EA93BB230CEBF800346235 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5EA93BA230CEBF800346235 /* Instruments.instrdst */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F5EA93BC230CEBF800346235 /* Instruments */ = {
+			isa = PBXGroup;
+			children = (
+				F5EA93BD230CEBF800346235 /* Instruments.instrpkg */,
+			);
+			path = Instruments;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F5EA93B9230CEBF800346235 /* Instruments */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5EA93BF230CEBF800346235 /* Build configuration list for PBXNativeTarget "Instruments" */;
+			buildPhases = (
+				F5EA93B8230CEBF800346235 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Instruments;
+			productName = Instruments;
+			productReference = F5EA93BA230CEBF800346235 /* Instruments.instrdst */;
+			productType = "com.apple.product-type.instruments-package";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F5EA93B4230CEBF800346235 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = Titus;
+				TargetAttributes = {
+					F5EA93B9230CEBF800346235 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = F5EA93B7230CEBF800346235 /* Build configuration list for PBXProject "Instruments" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F5EA93B3230CEBF800346235;
+			productRefGroup = F5EA93BB230CEBF800346235 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F5EA93B9230CEBF800346235 /* Instruments */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F5EA93B8230CEBF800346235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5EA93BE230CEBF800346235 /* Instruments.instrpkg in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F5EA93B5230CEBF800346235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		F5EA93B6230CEBF800346235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		F5EA93C0230CEBF800346235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q5R9EF4JAK;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Instruments/Packages";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "";
+			};
+			name = Debug;
+		};
+		F5EA93C1230CEBF800346235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q5R9EF4JAK;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Instruments/Packages";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F5EA93B7230CEBF800346235 /* Build configuration list for PBXProject "Instruments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5EA93B5230CEBF800346235 /* Debug */,
+				F5EA93B6230CEBF800346235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5EA93BF230CEBF800346235 /* Build configuration list for PBXNativeTarget "Instruments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5EA93C0230CEBF800346235 /* Debug */,
+				F5EA93C1230CEBF800346235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F5EA93B4230CEBF800346235 /* Project object */;
+}

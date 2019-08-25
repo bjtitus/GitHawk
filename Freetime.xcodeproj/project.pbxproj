@@ -543,6 +543,7 @@
 		DCA5ED141FAEE8030072F074 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5ED131FAEE8030072F074 /* Bookmark.swift */; };
 		DCA5ED1D1FAEF9EE0072F074 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5ED1C1FAEF9EE0072F074 /* BookmarkCell.swift */; };
 		DCD421C91FAFC049008CC2EC /* BookmarkHeaderSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD421C81FAFC049008CC2EC /* BookmarkHeaderSectionController.swift */; };
+		F5718D46230F738E0011FAD4 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5718D45230F738E0011FAD4 /* Log.swift */; };
 		FB9E0B1189A32219A0710FA2 /* Pods_FreetimeWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D396E0DA66FED629384A84BC /* Pods_FreetimeWatch.framework */; };
 /* End PBXBuildFile section */
 
@@ -567,6 +568,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 297AE8331EC0D58A00B44A1F;
 			remoteInfo = Freetime;
+		};
+		F5EA93C6230CEBF900346235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5EA93C2230CEBF800346235 /* Instruments.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F5EA93BA230CEBF800346235;
+			remoteInfo = Instruments;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1156,6 +1164,8 @@
 		E6EF57A6CF52B90990B21F83 /* Pods-FreetimeWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreetimeWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreetimeWatch Extension/Pods-FreetimeWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		ECF622FFD773FDA73297C0D0 /* Pods_Freetime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Freetime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE1F19D48A3F4AF2AC75330B /* Pods-FreetimeWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreetimeWatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FreetimeWatch/Pods-FreetimeWatch.debug.xcconfig"; sourceTree = "<group>"; };
+		F5718D45230F738E0011FAD4 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F5EA93C2230CEBF800346235 /* Instruments.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instruments.xcodeproj; path = Instruments/Instruments.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1696,6 +1706,7 @@
 		297AE82B1EC0D58A00B44A1F = {
 			isa = PBXGroup;
 			children = (
+				F5EA93C2230CEBF800346235 /* Instruments.xcodeproj */,
 				297AE8571EC0D5C100B44A1F /* Classes */,
 				CF4CC0BFE456879DD6DBC714 /* Frameworks */,
 				297AE84B1EC0D58A00B44A1F /* FreetimeTests */,
@@ -2300,6 +2311,7 @@
 				298C7E2721D80BAF00DD2A60 /* Error+GraphQLForbidden.swift */,
 				031E0240220B433C00A329F1 /* UIImage+Color.swift */,
 				03E8D823221D339200EB792A /* GithubURL.swift */,
+				F5718D45230F738E0011FAD4 /* Log.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2390,6 +2402,14 @@
 				296B8D8721AB859900E04181 /* RepositoryDetails+ListSwiftDiffable.swift */,
 			);
 			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		F5EA93C3230CEBF800346235 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5EA93C7230CEBF900346235 /* Instruments.instrdst */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2545,6 +2565,12 @@
 			mainGroup = 297AE82B1EC0D58A00B44A1F;
 			productRefGroup = 297AE8351EC0D58A00B44A1F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F5EA93C3230CEBF800346235 /* Products */;
+					ProjectRef = F5EA93C2230CEBF800346235 /* Instruments.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				297AE8331EC0D58A00B44A1F /* Freetime */,
@@ -2554,6 +2580,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F5EA93C7230CEBF900346235 /* Instruments.instrdst */ = {
+			isa = PBXReferenceProxy;
+			fileType = com.apple.instruments.instrdst;
+			path = Instruments.instrdst;
+			remoteRef = F5EA93C6230CEBF900346235 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		294EE4B7209006BF002C9CB1 /* Resources */ = {
@@ -3300,6 +3336,7 @@
 				986B871B1F2B87DD00AAB55C /* SearchRepoResult.swift in Sources */,
 				294A3D761FB29843000E81A4 /* ScrollViewKeyboardAdjuster.swift in Sources */,
 				986B87251F2B990A00AAB55C /* SearchRepoResultCell.swift in Sources */,
+				F5718D46230F738E0011FAD4 /* Log.swift in Sources */,
 				986B87231F2B98AD00AAB55C /* SearchResultSectionController.swift in Sources */,
 				29AF1E8E1F8ABC900008A0EF /* RepositoryFile.swift in Sources */,
 				986B871D1F2B8FCD00AAB55C /* SearchViewController.swift in Sources */,
